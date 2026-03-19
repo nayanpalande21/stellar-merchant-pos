@@ -1,36 +1,166 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚀 Stellar Merchant POS
 
-## Getting Started
+## 🌟 Overview
 
-First, run the development server:
+Stellar Merchant POS is a modern **crypto point-of-sale system** built on the Stellar Network that allows merchants to accept payments in XLM instantly.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+The application provides a clean, user-friendly interface where merchants can generate payment requests, and customers can send payments using their Stellar wallets. The system automatically detects transactions on-chain and confirms payments in real-time.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+---
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## ❗ Problem
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Retail stores and small businesses lack simple tools to accept cryptocurrency payments. Existing blockchain systems are often complex, slow, and not designed for everyday merchant use.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## 💡 Solution
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Stellar Merchant POS simplifies crypto payments by providing:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+* A **simple payment interface**
+* **Instant blockchain verification**
+* A **real-time payment confirmation system**
 
-## Deploy on Vercel
+This makes crypto payments as easy as UPI or card payments.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+---
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## ✨ Features
+
+### 🔹 Core Features (Level 5)
+
+* 💳 Generate payment requests
+* 🌐 Real-time payment detection using Stellar blockchain
+* ⚡ Instant transaction confirmation
+* 📜 Transaction history display
+* 📋 Copy wallet address functionality
+* 🎯 Input validation (prevent invalid payments)
+* 🎨 Premium UI (glassmorphism + animated stars)
+
+---
+
+### 🔹 UX Enhancements
+
+* ⏳ Animated "Checking Blockchain" loader
+* 🎉 Payment success feedback
+* 📊 Transaction counter
+* ⚠️ Testnet usage warning for users
+
+---
+
+### 🔹 Additional Improvements (Iteration)
+
+* Added copy-to-clipboard for wallet address
+* Improved UI clarity and design consistency
+* Prevented duplicate transaction detection
+* Enhanced success message visibility
+
+---
+
+## Architecture
+
+Frontend (Next.js)
+   ↓
+Stellar Horizon API
+   ↓
+Stellar Blockchain
+   ↓
+Payment Detection Logic
+
+## 🛠 Tech Stack
+
+* **Frontend:** Next.js, React, Tailwind CSS
+* **Blockchain:** Stellar Network (Horizon API)
+* **Library:** stellar-sdk
+* **Wallet:** Freighter Wallet
+
+---
+
+## 🏗 Architecture
+
+User → Frontend (Next.js) → Stellar Network → Payment Detection
+
+---
+
+## 🌐 Live Demo
+
+👉 https://your-app.vercel.app
+
+---
+
+## 🎥 Demo Video
+
+👉 (Add your video link here)
+
+---
+
+## 📸 Screenshots
+
+### 🔹 Home Page
+
+![Home](./screenshots/homepage.png)
+
+### 🔹 Payment Request
+
+![Payment](./screenshots/payment-request.png)
+
+### 🔹 Payment Success
+
+![Success](./screenshots/payment-successful.png)
+
+---
+ 
+## 👥 Test Users (Stellar Wallets)
+
+1. GXXXXXXX1
+2. GXXXXXXX2
+3. GXXXXXXX3
+4. GXXXXXXX4
+5. GXXXXXXX5
+
+---
+
+## 💬 User Feedback
+
+**User 1:** Easy to use and clean UI
+**User 2:** Payment confirmation is fast
+**User 3:** Suggested adding copy wallet button
+**User 4:** UI looks modern and professional
+**User 5:** Wanted clearer instructions for testnet
+
+---
+
+## 🔄 Iteration Based on Feedback
+
+* Added "Tap to Copy" wallet feature
+* Improved success message
+* Added testnet warning
+* Enhanced UI responsiveness
+
+---
+
+## 🚀 Future Enhancements (Level 6)
+
+* 📊 Analytics dashboard (total revenue, transactions)
+* 👥 Multi-merchant support
+* 💸 Fee sponsorship (gasless payments)
+* 🔐 Multi-signature payment approval
+* 🌍 Cross-border payments integration
+* 📡 Real-time transaction streaming
+* 🗄 Database integration (Supabase)
+* 📈 User metrics (DAU, retention)
+
+---
+
+## ⚠️ Note
+
+This project uses **Stellar Testnet only**. No real funds are involved.
+
+---
+
+## 🏆 Conclusion
+
+Stellar Merchant POS demonstrates how blockchain can be used in real-world retail scenarios to enable fast, secure, and user-friendly crypto payments.
+
+---
