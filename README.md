@@ -165,8 +165,7 @@ Below is proof of transactions verified on the Stellar Testnet blockchain using 
 
 ![OnChain Explorer](./screenshots/onchain-explorer-proof.png)
 
- You can independently verify transactions here:  
-https://stellar.expert/explorer/testnet  
+
 
 ---
 
