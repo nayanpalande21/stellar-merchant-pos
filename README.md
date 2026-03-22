@@ -132,6 +132,8 @@ https://youtu.be/EbWxDq_z3sc
 https://stellar.expert/explorer/testnet
 ---
 
+All users successfully completed payments using the application interface, and each transaction was verified on the Stellar Testnet blockchain.
+
 ##  User Feedback
 
 - **User 1:** Easy to use and clean UI  
