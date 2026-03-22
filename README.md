@@ -120,29 +120,66 @@ https://youtu.be/EbWxDq_z3sc
 
 ---
 
-##  Test Users (Stellar Wallets)
+## 👥 Test Users (Stellar Wallets)
 
-1. GCLHTHMOVW3J6O3IVLZWMWDONMLPONJTR6QSLI2SSBWAKB44IKJE3ES2 (4 XLM)
-2. GDJCKA3JG2BUJO5LJLD66DATXE4HCJG62XPLFJKNJRVQSBA3IPB2BWQ2 (1 XLM)
-3. GBYUTGCNPXOLSHPZ6SCJQCCS3GSYLE2MXQQO6DFUQ2E7G4Y4NKSL2PFQ (2 XLM)
-4. GDRWXCQ3IN3ZFXOKIPICFI2D7GERUQ4GEGISRGWND5VHQCXLO54YZ3JK (5 XLM)
-5. GCLTDFYMDJZYLDKETB6Z24CCPHGFQS7NRZFJWT4AUXQZ5SF2BJOME7CN (1 XLM)
+1. GCLHTHMOVW3J6O3IVLZWMWDONMLPONJTR6QSLI2SSBWAKB44IKJE3ES2 (4 XLM)  
+2. GDJCKA3JG2BUJO5LJLD66DATXE4HCJG62XPLFJKNJRVQSBA3IPB2BWQ2 (1 XLM)  
+3. GBYUTGCNPXOLSHPZ6SCJQCCS3GSYLE2MXQQO6DFUQ2E7G4Y4NKSL2PFQ (2 XLM)  
+4. GDRWXCQ3IN3ZFXOKIPICFI2D7GERUQ4GEGISRGWND5VHQCXLO54YZ3JK (5 XLM)  
+5. GCLTDFYMDJZYLDKETB6Z24CCPHGFQS7NRZFJWT4AUXQZ5SF2BJOME7CN (1 XLM)  
 
- Transactions verified on:
-https://stellar.expert/explorer/testnet
+🔍 Transactions verified on:  
+https://stellar.expert/explorer/testnet  
+
 ---
 
-All users successfully completed payments using the application interface, and each transaction was verified on the Stellar Testnet blockchain.
+All users successfully completed payments using the application interface.  
+Each transaction was processed in real-time and verified on the Stellar Testnet blockchain, demonstrating the reliability and correctness of the payment system.
+
+---
+
+##  Transaction Proof (Testnet)
+
+Below are real transaction screenshots captured during testing:
+
+### User 1 (4 XLM)
+![User1](./screenshots/tx-user1.png)
+
+### User 2 (1 XLM)
+![User2](./screenshots/tx-user2.png)
+
+### User 3 (2 XLM)
+![User3](./screenshots/tx-user3.png)
+
+### User 4 (5 XLM)
+![User4](./screenshots/tx-user4.png)
+
+### User 5 (1 XLM)
+![User5](./screenshots/tx-user5.png)
+
+---
+
+##  On-Chain Verification (Stellar Explorer)
+
+Below is proof of transactions verified on the Stellar Testnet blockchain using Stellar Expert.
+
+![OnChain Explorer](./screenshots/onchain-explorer-proof.png)
+
+ You can independently verify transactions here:  
+https://stellar.expert/explorer/testnet  
+
+---
 
 ##  User Feedback
 
 - **User 1:** Easy to use and clean UI  
-- **User 2:** Payment confirmation is fast  
-- **User 3:** Suggested adding copy wallet button  
-- **User 4:** UI looks modern and professional  
-- **User 5:** Wanted clearer instructions for testnet  
+- **User 2:** Payment confirmation is extremely fast and reliable  
+- **User 3:** On-chain transaction visibility significantly increased user confidence in the system
+- **User 4:** UI looks modern, premium, and professional  
+- **User 5:** Clear instructions improved usability for testnet users  
 
 ---
+
 
 ## Improvements Based on Feedback
 
