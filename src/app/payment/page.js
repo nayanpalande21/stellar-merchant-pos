@@ -1,10 +1,18 @@
 "use client";
-export const dynamic = "force-dynamic";
+
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { sendPayment } from "@/utils/freighter";
+import { Suspense } from "react";
 
+export default function PaymentPage() {
+  return (
+    <Suspense fallback={<div className="text-white">Loading...</div>}>
+      <PaymentPageContent />
+    </Suspense>
+  );
+}
 const STARS = Array.from({ length: 40 }, (_, i) => ({
   id: i,
   width: ((i * 37 + 13) % 25 + 5) / 10,
@@ -15,7 +23,7 @@ const STARS = Array.from({ length: 40 }, (_, i) => ({
   delay: ((i * 67) % 40) / 10,
 }));
 
-export default function PaymentPage() {
+function PaymentPageContent() {
   const params = useSearchParams();
 
   const amount = params.get("amount");
