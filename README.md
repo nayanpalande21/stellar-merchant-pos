@@ -91,7 +91,7 @@ Detailed system design available here:
 
 ##  Live Demo
 
- https://your-app.vercel.app
+ https://stellar-merchant-pos-uaao.vercel.app/
 
 ---
 
