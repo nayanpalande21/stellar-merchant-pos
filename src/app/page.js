@@ -2,178 +2,306 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { connectWallet, sendPayment } from "@/utils/freighter";
+import { accountExists } from "@/utils/stellar";
 
-const STARS = Array.from({ length: 40 }, (_, i) => ({
-  id: i,
-  width: ((i * 37 + 13) % 25 + 5) / 10,
-  height: ((i * 53 + 7) % 25 + 5) / 10,
-  top: ((i * 71 + 19) % 1000) / 10,
-  left: ((i * 43 + 29) % 1000) / 10,
-  duration: 2 + ((i * 31) % 30) / 10,
-  delay: ((i * 67) % 40) / 10,
-}));
+
+const MERCHANT_WALLET =
+  "GBJOJYGFEIVNMQAY5Q4NQ5OF6MB5GI4JIRE6VCZ66JDU4RSJZTT7FL2B";
+
+const NETWORKS = [
+  { id: "testnet",   label: "Testnet"   },
+  { id: "mainnet",   label: "Mainnet"   },
+  { id: "futurenet", label: "Futurenet" },
+];
+
+const STARS = [
+  { top: "8%",  left: "12%", size: 2,   delay: 0   },
+  { top: "15%", left: "75%", size: 1.5, delay: 0.8 },
+  { top: "22%", left: "88%", size: 1,   delay: 1.5 },
+  { top: "35%", left: "5%",  size: 2.5, delay: 0.3 },
+  { top: "50%", left: "92%", size: 1,   delay: 2.1 },
+  { top: "65%", left: "18%", size: 1.5, delay: 1.1 },
+  { top: "78%", left: "60%", size: 1,   delay: 0.6 },
+  { top: "85%", left: "80%", size: 2,   delay: 1.7 },
+  { top: "92%", left: "30%", size: 1,   delay: 2.4 },
+  { top: "5%",  left: "45%", size: 1.5, delay: 0.9 },
+  { top: "42%", left: "50%", size: 1,   delay: 1.3 },
+  { top: "60%", left: "38%", size: 2,   delay: 0.5 },
+];
 
 export default function Home() {
-  const [amount, setAmount] = useState("");
+  const [amount,  setAmount]  = useState("");
   const [network, setNetwork] = useState("testnet");
+  const [wallet,  setWallet]  = useState(null);
+  const [paying,  setPaying]  = useState(false);
+
   const router = useRouter();
 
-  const networks = [
-    { id: "testnet", label: "Testnet" },
-    { id: "mainnet",label: "Mainnet" },
-    { id: "futurenet", label: "Futurenet" },
-  ];
-
-  const handlePayment = () => {
-    if (!amount || parseFloat(amount) <= 0) {
-      alert("Enter valid amount");
+  // ── Generate Payment Page ─────────────────────────────────
+  const handleGeneratePayment = () => {
+    const val = parseFloat(amount);
+    if (!amount || isNaN(val) || val < 1 || val > 1000) {
+      alert("Enter a valid amount between 1 and 1000 XLM");
       return;
     }
-    router.push(`/payment?amount=${amount}&network=${network}`);
+    if (!wallet) {
+      alert("Connect your Freighter wallet first");
+      return;
+    }
+    router.push(`/payment?amount=${amount}&network=${network}&wallet=${wallet}`);
   };
 
+  // ── Direct Pay via Freighter ──────────────────────────────
+  const handleDirectPay = async () => {
+  if (!wallet) return alert("Connect your Freighter wallet first");
+
+  const val = parseFloat(amount);
+  if (!amount || isNaN(val) || val < 1 || val > 1000) {
+    return alert("Enter a valid amount between 1 and 1000 XLM");
+  }
+
+  setPaying(true);
+  try {
+    const res = await sendPayment({
+      source: wallet,
+      destination: MERCHANT_WALLET,
+      amount,
+      network,
+    });
+
+    alert(`✅ Payment sent!\nTX Hash: ${res.hash}`);
+  } catch (err) {
+    console.error(err);
+    alert("❌ " + (err?.message || "Payment failed"));
+  } finally {
+    setPaying(false);
+  }
+};
   return (
-    <div
-      className="min-h-screen flex items-center justify-center p-4"
-      style={{ background: "#0a0a14", fontFamily: "'Space Grotesk', sans-serif" }}
-    >
-      {/* Stars */}
-      <div className="fixed inset-0 pointer-events-none overflow-hidden">
-        {STARS.map((s) => (
-          <div
-            key={s.id}
-            className="absolute rounded-full bg-white"
-            style={{
-              width: `${s.width}px`,
-              height: `${s.height}px`,
-              top: `${s.top}%`,
-              left: `${s.left}%`,
-              opacity: 0.2,
-              animation: `twinkle ${s.duration}s ${s.delay}s infinite`,
-            }}
-          />
+    <>
+      <style>{`
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: 'Inter', sans-serif; background: #000; min-height: 100vh; }
+
+        @keyframes twinkle {
+          0%   { opacity: 0.2; }
+          100% { opacity: 0.9; }
+        }
+
+        .stars-bg {
+          position: fixed; inset: 0; z-index: 0;
+          background:
+            radial-gradient(ellipse at 50% 0%, rgba(30,60,120,0.35) 0%, transparent 60%),
+            radial-gradient(ellipse at 80% 20%, rgba(10,30,80,0.25) 0%, transparent 50%),
+            #000;
+          overflow: hidden;
+        }
+        .star {
+          position: absolute; background: white; border-radius: 50%;
+          animation: twinkle 3s infinite alternate;
+        }
+
+        .page {
+          position: relative; z-index: 1;
+          min-height: 100vh; display: flex;
+          align-items: center; justify-content: center; padding: 24px;
+        }
+
+        .card {
+          background: rgba(18,22,36,0.92);
+          border: 1px solid rgba(255,255,255,0.07);
+          border-radius: 24px; padding: 40px 32px 32px;
+          width: 100%; max-width: 400px;
+          display: flex; flex-direction: column; align-items: center;
+          box-shadow: 0 0 0 1px rgba(255,255,255,0.04),
+                      0 32px 80px rgba(0,0,0,0.7),
+                      0 0 120px rgba(30,100,255,0.07);
+        }
+
+        .star-icon-wrap {
+          width: 56px; height: 56px; border-radius: 50%;
+          background: rgba(30,80,200,0.35);
+          border: 1.5px solid rgba(80,140,255,0.4);
+          display: flex; align-items: center; justify-content: center;
+          margin-bottom: 16px;
+          box-shadow: 0 0 24px rgba(60,120,255,0.3);
+        }
+
+        .title    { color: #fff; font-size: 20px; font-weight: 700; letter-spacing: -0.3px; margin-bottom: 4px; }
+        .subtitle { color: rgba(255,255,255,0.45); font-size: 13px; margin-bottom: 6px; }
+        .notice   { color: #f0a500; font-size: 12px; margin-bottom: 28px; }
+
+        .connect-btn {
+          width: 100%; padding: 9px 16px; border-radius: 8px;
+          background: transparent; border: 1px solid rgba(80,140,255,0.5);
+          color: #5ba3ff; font-size: 13px; font-weight: 500;
+          cursor: pointer; margin-bottom: 10px; transition: background 0.2s;
+          font-family: 'Inter', sans-serif;
+        }
+        .connect-btn:hover { background: rgba(80,140,255,0.1); }
+
+        .wallet-address {
+          font-size: 10px; color: #4ade80; text-align: center;
+          word-break: break-all; margin-bottom: 12px; padding: 0 4px; width: 100%;
+        }
+
+        .field-label {
+          align-self: flex-start; width: 100%;
+          color: #5ba3ff; font-size: 13px; font-weight: 500; margin-bottom: 8px;
+        }
+
+        .amount-row {
+          display: flex; align-items: center; width: 100%;
+          background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.1);
+          border-radius: 10px; overflow: hidden; margin-bottom: 24px;
+        }
+        .amount-input {
+          flex: 1; background: transparent; border: none; outline: none;
+          color: #fff; font-size: 16px; font-family: 'Inter',sans-serif; padding: 14px 16px;
+        }
+        .amount-input::placeholder { color: rgba(255,255,255,0.3); }
+        .amount-spinners { display: flex; flex-direction: column; padding: 0 8px; gap: 2px; }
+        .spinner-btn {
+          background: none; border: none; color: rgba(255,255,255,0.4);
+          font-size: 10px; cursor: pointer; line-height: 1; padding: 2px;
+        }
+        .spinner-btn:hover { color: #fff; }
+        .xlm-badge {
+          background: #3b82f6; color: #fff; font-size: 13px; font-weight: 600;
+          padding: 8px 16px; margin: 6px; border-radius: 6px; letter-spacing: 0.5px;
+        }
+
+        .network-row { display: flex; gap: 8px; width: 100%; margin-bottom: 24px; }
+        .net-btn {
+          flex: 1; padding: 10px 0; border-radius: 8px; background: transparent;
+          border: 1px solid rgba(255,255,255,0.12); color: rgba(255,255,255,0.7);
+          font-size: 13px; font-weight: 500; cursor: pointer; transition: all 0.18s;
+          font-family: 'Inter', sans-serif;
+        }
+        .net-btn:hover  { border-color: rgba(255,255,255,0.25); color: #fff; }
+        .net-btn.active { border-color: rgba(255,255,255,0.5); color: #fff; background: rgba(255,255,255,0.06); }
+
+        .generate-btn {
+          width: 100%; padding: 16px; border-radius: 12px; border: none;
+          background: linear-gradient(90deg,#60a5fa,#a78bfa);
+          color: #fff; font-size: 16px; font-weight: 700; cursor: pointer;
+          letter-spacing: -0.2px; margin-bottom: 14px;
+          transition: opacity 0.2s, transform 0.1s; font-family: 'Inter', sans-serif;
+        }
+        .generate-btn:hover  { opacity: 0.92; }
+        .generate-btn:active { transform: scale(0.99); }
+
+        .pay-btn {
+          width: 100%; padding: 11px; border-radius: 8px;
+          border: 1px solid rgba(80,200,120,0.4); background: transparent;
+          color: #4ade80; font-size: 13px; font-weight: 500; cursor: pointer;
+          margin-bottom: 20px; transition: background 0.2s; font-family: 'Inter', sans-serif;
+        }
+        .pay-btn:hover    { background: rgba(74,222,128,0.08); }
+        .pay-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        .divider   { width: 100%; height: 1px; background: rgba(255,255,255,0.07); margin-bottom: 16px; }
+        .fee-row   { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+        .fee-label { color: rgba(255,255,255,0.4); font-size: 13px; }
+        .fee-value { color: #5ba3ff; font-size: 13px; font-weight: 500; }
+      `}</style>
+
+      {/* Starfield */}
+      <div className="stars-bg" aria-hidden="true">
+        {STARS.map((s, i) => (
+          <div key={i} className="star" style={{
+            top: s.top, left: s.left,
+            width: s.size, height: s.size,
+            animationDelay:    `${s.delay}s`,
+            animationDuration: `${2 + s.delay}s`,
+          }} />
         ))}
       </div>
 
-      <div
-        className="relative w-full max-w-sm rounded-3xl p-8 backdrop-blur-xl"
-        style={{
-          background:
-            "linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
-          border: "1px solid rgba(255,255,255,0.1)",
-        }}
-      >
-        {/* Glow */}
-        <div
-          className="absolute -top-16 left-1/2 -translate-x-1/2 w-32 h-32 rounded-full"
-          style={{
-            background:
-              "radial-gradient(circle, rgba(99,211,255,0.25) 0%, transparent 70%)",
-          }}
-        />
+      <div className="page">
+        <div className="card">
 
-        {/* Logo */}
-        <div
-          className="mx-auto mb-5 w-12 h-12 rounded-full flex items-center justify-center"
-          style={{
-            border: "1px solid rgba(99,211,255,0.4)",
-            background: "rgba(99,211,255,0.08)",
-          }}
-        >
-          <svg width="22" height="22" viewBox="0 0 28 28">
-            <path
-              d="M14 2L16.5 10H25L18.5 15L21 23L14 18L7 23L9.5 15L3 10H11.5L14 2Z"
-              fill="rgba(99,211,255,0.9)"
-            />
-          </svg>
-        </div>
+          {/* Icon */}
+          <div className="star-icon-wrap">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="#5ba3ff">
+              <path d="M12 2l2.4 7.4H22l-6.2 4.5 2.4 7.4L12 17 5.8 21.3l2.4-7.4L2 9.4h7.6z"/>
+            </svg>
+          </div>
 
-        <h1
-          className="text-center text-xl font-extrabold mb-1"
-          style={{ fontFamily: "'Syne', sans-serif", color: "#f0f4ff" }}
-        >
-          Stellar Merchant
-        </h1>
+          <h1 className="title">Stellar Merchant</h1>
+          <p className="subtitle">Point of Sale Terminal</p>
+          <p className="notice">Use Stellar Testnet <em>only</em> (no real money)</p>
 
-        <p className="text-center text-xs text-gray-400 mb-2">
-          Point of Sale Terminal
-        </p>
-
-        <p className="text-center text-[10px] text-yellow-400 mb-6">
-          Use Stellar Testnet only (no real money)
-        </p>
-
-        {/* Amount */}
-        <label className="text-xs text-blue-400 mb-2 block">Amount</label>
-
-        <div className="relative mb-5">
-          <input
-            type="number"
-            placeholder="0.00"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            className="w-full rounded-2xl px-4 py-3 pr-16 text-lg outline-none"
-            style={{
-              background: "rgba(255,255,255,0.05)",
-              border: "1px solid rgba(255,255,255,0.12)",
-              color: "#f0f4ff",
+          {/* Connect Wallet */}
+          <button
+            className="connect-btn"
+            onClick={async () => {
+              try {
+                const address = await connectWallet();
+                setWallet(address);
+              } catch (err) {
+                alert("❌ " + err.message);
+              }
             }}
-          />
-          <span className="absolute right-3 top-1/2 -translate-y-1/2 text-xs bg-blue-500 px-2 py-1 rounded">
-            XLM
-          </span>
-        </div>
+          >
+            {wallet ? "Wallet Connected ✅" : "Connect Freighter"}
+          </button>
+          {wallet && <p className="wallet-address">{wallet}</p>}
 
-        {/* Network */}
-        <label className="text-xs text-blue-400 mb-2 block">Network</label>
+          {/* Amount */}
+          <label className="field-label">Amount</label>
+          <div className="amount-row">
+            <input
+              className="amount-input"
+              type="number"
+              min="1" max="1000"
+              placeholder="0.00"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+            />
+            <div className="amount-spinners">
+              <button className="spinner-btn"
+                onClick={() => setAmount(v => String(Math.min(1000, (parseFloat(v)||0)+1).toFixed(2)))}>▲</button>
+              <button className="spinner-btn"
+                onClick={() => setAmount(v => String(Math.max(1, (parseFloat(v)||1)-1).toFixed(2)))}>▼</button>
+            </div>
+            <span className="xlm-badge">XLM</span>
+          </div>
 
-        <div className="grid grid-cols-3 gap-2 mb-5">
-          {networks.map((n) => (
-            <button
-              key={n.id}
-              onClick={() => setNetwork(n.id)}
-              className="rounded-xl py-2"
-              style={{
-                background:
-                  network === n.id
-                    ? "rgba(99,211,255,0.07)"
-                    : "rgba(255,255,255,0.04)",
-                border: `1px solid ${
-                  network === n.id
-                    ? "rgba(99,211,255,0.45)"
-                    : "rgba(255,255,255,0.08)"
-                }`,
-              }}
-            >
-              <span className="block">{n.icon}</span>
-              <span className="text-xs">{n.label}</span>
-            </button>
-          ))}
-        </div>
+          {/* Network */}
+          <label className="field-label">Network</label>
+          <div className="network-row">
+            {NETWORKS.map((n) => (
+              <button
+                key={n.id}
+                className={`net-btn${network === n.id ? " active" : ""}`}
+                onClick={() => setNetwork(n.id)}
+              >
+                {n.label}
+              </button>
+            ))}
+          </div>
 
-        {/* CTA */}
-        <button
-          onClick={handlePayment}
-          className="w-full py-3.5 rounded-2xl font-bold transition hover:scale-105"
-          style={{
-            background:
-              "linear-gradient(135deg, #63d3ff 0%, #a78bfa 100%)",
-            color: "#08091a",
-          }}
-        >
-           Generate Payment
-        </button>
+          {/* Generate Payment Page */}
+          <button className="generate-btn" onClick={handleGeneratePayment}>
+            Generate Payment
+          </button>
 
-        {/* Footer */}
-        <div className="flex justify-between mt-4 pt-3 text-xs border-t border-gray-700">
-          <span className="text-gray-400">Network fee</span>
-          <span className="text-blue-400">~0.00001 XLM</span>
+          {/* Direct Pay */}
+          <button className="pay-btn" onClick={handleDirectPay} disabled={paying}>
+            {paying ? "Sending…" : "Pay via Freighter"}
+          </button>
+
+          <div className="divider" />
+          <div className="fee-row">
+            <span className="fee-label">Network fee</span>
+            <span className="fee-value">~0.00001 XLM</span>
+          </div>
+
         </div>
       </div>
-
-      <style>{`
-        @keyframes twinkle { 0%,100%{opacity:.1} 50%{opacity:.7} }
-      `}</style>
-    </div>
+    </>
   );
 }

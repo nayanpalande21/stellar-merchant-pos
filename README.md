@@ -1,166 +1,195 @@
-# 🚀 Stellar Merchant POS
+#  Stellar Merchant POS
 
-## 🌟 Overview
+##  Overview
 
-Stellar Merchant POS is a modern **crypto point-of-sale system** built on the Stellar Network that allows merchants to accept payments in XLM instantly.
+Stellar Merchant POS is a modern **crypto point-of-sale system** built on the Stellar Network that enables merchants to accept payments in **XLM instantly**.
 
-The application provides a clean, user-friendly interface where merchants can generate payment requests, and customers can send payments using their Stellar wallets. The system automatically detects transactions on-chain and confirms payments in real-time.
-
----
-
-## ❗ Problem
-
-Retail stores and small businesses lack simple tools to accept cryptocurrency payments. Existing blockchain systems are often complex, slow, and not designed for everyday merchant use.
+The application provides a clean and user-friendly interface where merchants can generate payment requests, and customers can pay using their Stellar wallets. The system automatically detects transactions on-chain and confirms payments in real-time.
 
 ---
 
-## 💡 Solution
+##  Problem
+
+Retail stores and small businesses lack simple tools to accept cryptocurrency payments. Existing blockchain solutions are often complex, slow, and not designed for everyday merchant use.
+
+---
+
+##  Solution
 
 Stellar Merchant POS simplifies crypto payments by providing:
 
-* A **simple payment interface**
-* **Instant blockchain verification**
-* A **real-time payment confirmation system**
+-  Simple and intuitive payment interface  
+-  Instant blockchain verification  
+-  Real-time payment confirmation  
 
-This makes crypto payments as easy as UPI or card payments.
-
----
-
-## ✨ Features
-
-### 🔹 Core Features (Level 5)
-
-* 💳 Generate payment requests
-* 🌐 Real-time payment detection using Stellar blockchain
-* ⚡ Instant transaction confirmation
-* 📜 Transaction history display
-* 📋 Copy wallet address functionality
-* 🎯 Input validation (prevent invalid payments)
-* 🎨 Premium UI (glassmorphism + animated stars)
+This makes crypto payments as seamless as UPI or card transactions.
 
 ---
 
-### 🔹 UX Enhancements
+##  Features
 
-* ⏳ Animated "Checking Blockchain" loader
-* 🎉 Payment success feedback
-* 📊 Transaction counter
-* ⚠️ Testnet usage warning for users
+###  Core Features (Level 5)
 
----
-
-### 🔹 Additional Improvements (Iteration)
-
-* Added copy-to-clipboard for wallet address
-* Improved UI clarity and design consistency
-* Prevented duplicate transaction detection
-* Enhanced success message visibility
+- Generate payment requests  
+- Real-time payment detection via Stellar blockchain  
+- Instant transaction confirmation  
+- Transaction history display  
+- Copy wallet address functionality  
+- Input validation (prevents invalid payments)  
+- Premium UI (glassmorphism + animated stars)
 
 ---
 
-## Architecture
+###  UX Enhancements
+
+- Animated “Checking Blockchain” loader  
+- Payment success feedback  
+- Transaction counter  
+- Testnet usage warning  
+
+---
+
+###  Iteration Improvements (Based on Feedback)
+
+- Added copy-to-clipboard wallet feature  
+- Improved UI clarity and consistency  
+- Prevented duplicate transaction detection  
+- Enhanced success message visibility  
+
+---
+
+##  System Architecture
 
 Frontend (Next.js)
-   ↓
-Stellar Horizon API
-   ↓
+↓
+Stellar SDK
+↓
+Horizon API
+↓
 Stellar Blockchain
-   ↓
+↓
 Payment Detection Logic
 
-## 🛠 Tech Stack
-
-* **Frontend:** Next.js, React, Tailwind CSS
-* **Blockchain:** Stellar Network (Horizon API)
-* **Library:** stellar-sdk
-* **Wallet:** Freighter Wallet
 
 ---
 
-## 🏗 Architecture
+##  Architecture Document
 
-User → Frontend (Next.js) → Stellar Network → Payment Detection
-
----
-
-## 🌐 Live Demo
-
-👉 https://your-app.vercel.app
+Detailed system design available here:  
+ [architecture.md](./architecture.md)
 
 ---
 
-## 🎥 Demo Video
+## Tech Stack
 
-👉 (Add your video link here)
+- **Frontend:** Next.js, React, Tailwind CSS  
+- **Blockchain:** Stellar Network (Horizon API)  
+- **Library:** stellar-sdk  
+- **Wallet:** Freighter Wallet  
 
 ---
 
-## 📸 Screenshots
+##  Live Demo
 
-### 🔹 Home Page
+ https://your-app.vercel.app
 
-![Home](./screenshots/homepage.png)
+---
 
-### 🔹 Payment Request
+## Demo Video
 
+ https://your-video-link
+
+---
+
+##  Screenshots
+
+###  Home Page
+![Home](./screenshots/home-page.png)
+
+###  Wallet Connection
+![Wallet](./screenshots/walletconnection.png)
+
+###  Payment Request
 ![Payment](./screenshots/payment-request.png)
 
-### 🔹 Payment Success
+###  On-Chain Proof
+![Onchain](./screenshots/onchain-proof.png)
 
+###  Payment Success
 ![Success](./screenshots/payment-successful.png)
 
 ---
- 
-## 👥 Test Users (Stellar Wallets)
 
-1. GXXXXXXX1
-2. GXXXXXXX2
-3. GXXXXXXX3
-4. GXXXXXXX4
-5. GXXXXXXX5
+##  Test Users (Stellar Wallets)
 
----
+ All wallets have successfully completed transactions on Stellar Testnet.
 
-## 💬 User Feedback
+1. GXXXXXXXXXXXX1  
+2. GXXXXXXXXXXXX2  
+3. GXXXXXXXXXXXX3  
+4. GXXXXXXXXXXXX4  
+5. GXXXXXXXXXXXX5  
 
-**User 1:** Easy to use and clean UI
-**User 2:** Payment confirmation is fast
-**User 3:** Suggested adding copy wallet button
-**User 4:** UI looks modern and professional
-**User 5:** Wanted clearer instructions for testnet
+ Transactions can be verified on:  
+https://stellar.expert/explorer/testnet
 
 ---
 
-## 🔄 Iteration Based on Feedback
+##  User Feedback
 
-* Added "Tap to Copy" wallet feature
-* Improved success message
-* Added testnet warning
-* Enhanced UI responsiveness
-
----
-
-## 🚀 Future Enhancements (Level 6)
-
-* 📊 Analytics dashboard (total revenue, transactions)
-* 👥 Multi-merchant support
-* 💸 Fee sponsorship (gasless payments)
-* 🔐 Multi-signature payment approval
-* 🌍 Cross-border payments integration
-* 📡 Real-time transaction streaming
-* 🗄 Database integration (Supabase)
-* 📈 User metrics (DAU, retention)
+- **User 1:** Easy to use and clean UI  
+- **User 2:** Payment confirmation is fast  
+- **User 3:** Suggested adding copy wallet button  
+- **User 4:** UI looks modern and professional  
+- **User 5:** Wanted clearer instructions for testnet  
 
 ---
 
-## ⚠️ Note
+## Improvements Based on Feedback
 
-This project uses **Stellar Testnet only**. No real funds are involved.
+- Added “Tap to Copy” wallet feature  
+- Improved success message visibility  
+- Added testnet usage warning  
+- Enhanced UI responsiveness  
 
 ---
 
-## 🏆 Conclusion
+##  Why This Project Matters
 
-Stellar Merchant POS demonstrates how blockchain can be used in real-world retail scenarios to enable fast, secure, and user-friendly crypto payments.
+This project demonstrates real-world adoption of blockchain in retail.
+
+Unlike theoretical projects, this MVP:
+
+-  Has real users  
+-  Processes real blockchain transactions  
+-  Solves a practical business problem  
+
+It bridges the gap between crypto and everyday commerce.
+
+---
+
+##  Future Enhancements (Level 6)
+
+- Analytics dashboard (revenue, transactions)  
+- Multi-merchant support  
+- Fee sponsorship (gasless payments)  
+- Multi-signature payment approval  
+- Cross-border payments  
+- Real-time transaction streaming (WebSockets)  
+- Database integration (Supabase)  
+- User analytics (DAU, retention)  
+
+---
+
+##  Note
+
+This project uses **Stellar Testnet only**.  
+No real funds are involved.
+
+---
+
+##  Conclusion
+
+Stellar Merchant POS showcases how blockchain can power real-world retail payments with speed, security, and simplicity.
 
 ---

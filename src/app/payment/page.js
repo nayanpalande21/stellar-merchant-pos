@@ -2,7 +2,7 @@
 
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
-import { checkPayments } from "@/utils/stellar";
+import { sendPayment } from "@/utils/freighter";
 
 const STARS = Array.from({ length: 40 }, (_, i) => ({
   id: i,
@@ -16,24 +16,17 @@ const STARS = Array.from({ length: 40 }, (_, i) => ({
 
 export default function PaymentPage() {
   const params = useSearchParams();
+
   const amount = params.get("amount");
-
-  if (!amount || parseFloat(amount) <= 0) {
-    return (
-      <div className="min-h-screen flex items-center justify-center text-white">
-        Invalid Amount
-      </div>
-    );
-  }
-
   const network = params.get("network") || "testnet";
+  const wallet = params.get("wallet");
 
   const merchantWallet =
     "GBJOJYGFEIVNMQAY5Q4NQ5OF6MB5GI4JIRE6VCZ66JDU4RSJZTT7FL2B";
 
   const [status, setStatus] = useState("waiting");
-  const [transactions, setTransactions] = useState([]);
-  const [processed, setProcessed] = useState(false);
+  const [txHash, setTxHash] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [copied, setCopied] = useState(false);
   const [dots, setDots] = useState(".");
 
@@ -46,46 +39,45 @@ export default function PaymentPage() {
     return () => clearInterval(t);
   }, [status]);
 
-  // Payment detection
-  useEffect(() => {
-    const interval = setInterval(async () => {
-      const payments = await checkPayments(merchantWallet);
-
-      const match = payments.find(
-        (p) =>
-          p.type === "payment" &&
-          p.to === merchantWallet &&
-          parseFloat(p.amount) === parseFloat(amount)
-      );
-
-      const lastHash = localStorage.getItem("lastTxHash");
-
-      if (match && !processed && match.id !== lastHash) {
-        setStatus("success");
-        setProcessed(true);
-
-        localStorage.setItem("lastTxHash", match.id);
-
-        setTransactions((prev) => [
-          ...prev,
-          {
-            amount: match.amount,
-            hash: match.id,
-            date: new Date().toLocaleString(),
-          },
-        ]);
-
-        clearInterval(interval);
-      }
-    }, 5000);
-
-    return () => clearInterval(interval);
-  }, [amount, processed]);
+  if (!amount || parseFloat(amount) <= 0) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-white">
+        Invalid Amount
+      </div>
+    );
+  }
 
   const copyWallet = () => {
     navigator.clipboard.writeText(merchantWallet);
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
+  };
+
+  const handlePay = async () => {
+    if (!wallet) {
+      alert("Connect wallet first");
+      return;
+    }
+
+    setLoading(true);
+
+    try {
+      const res = await sendPayment({
+        source: wallet,
+        destination: merchantWallet,
+        amount,
+        network,
+      });
+
+      setTxHash(res.hash);
+      setStatus("success");
+    } catch (err) {
+      console.error(err);
+      setStatus("error");
+      alert("Payment failed");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -111,14 +103,14 @@ export default function PaymentPage() {
         ))}
       </div>
 
-      <div className="relative w-full max-w-sm rounded-3xl p-8 backdrop-blur-xl"
+      <div
+        className="relative w-full max-w-sm rounded-3xl p-8 backdrop-blur-xl"
         style={{
           background:
             "linear-gradient(145deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02))",
           border: "1px solid rgba(255,255,255,0.1)",
         }}
       >
-
         {/* Header */}
         <h1 className="text-center text-xl font-extrabold mb-1 text-white">
           Payment Request
@@ -129,7 +121,7 @@ export default function PaymentPage() {
         </p>
 
         <p className="text-center text-[10px] text-yellow-400 mb-4">
-          ⚠️ Use Stellar Testnet only (no real money)
+          ⚠️ Use Stellar Testnet only
         </p>
 
         {/* Amount */}
@@ -143,7 +135,7 @@ export default function PaymentPage() {
 
         <button
           onClick={copyWallet}
-          className="w-full bg-gray-800 p-3 rounded mb-5 text-xs break-all text-left"
+          className="w-full bg-gray-800 p-3 rounded mb-2 text-xs break-all text-left"
         >
           {merchantWallet}
           <div className="text-right text-xs mt-1">
@@ -151,40 +143,51 @@ export default function PaymentPage() {
           </div>
         </button>
 
-        {/* Status */}
-        <div className="text-center mb-5">
-          {status === "waiting" ? (
-            <p className="text-gray-400">
-              Checking Blockchain{dots}
-            </p>
-          ) : (
+        {/* PAY BUTTON */}
+        {status === "waiting" && (
+          <button
+            onClick={handlePay}
+            disabled={loading}
+            className="w-full bg-green-500 py-3 rounded mb-3"
+          >
+            {loading ? "Processing..." : "Pay via Freighter"}
+          </button>
+        )}
+
+        {/* STATUS */}
+        <div className="text-center mb-3">
+          {status === "waiting" && (
+            <p className="text-gray-400">⏳ Waiting{dots}</p>
+          )}
+
+          {status === "success" && (
             <p className="text-green-400 font-bold">
               🎉 Payment Successful
             </p>
           )}
+
+          {status === "error" && (
+            <p className="text-red-400">
+              ❌ Payment Failed
+            </p>
+          )}
         </div>
 
-        {/* Transactions */}
-        {transactions.length > 0 && (
-          <div className="mb-5">
-            <p className="text-xs text-gray-400 mb-2">
-              Total Transactions: {transactions.length}
-            </p>
-
-            {transactions.map((tx, i) => (
-              <div key={i} className="bg-green-900 p-3 rounded mb-2">
-                <p>{tx.amount} XLM</p>
-                <p className="text-xs">{tx.date}</p>
-                <p className="text-xs break-all">{tx.hash}</p>
-              </div>
-            ))}
-          </div>
+        {/* TX HASH */}
+        {txHash && (
+          <a
+            href={`https://stellar.expert/explorer/${network}/tx/${txHash}`}
+            target="_blank"
+            className="text-blue-400 underline text-xs block text-center mt-2"
+          >
+            🔗 View On-Chain Proof
+          </a>
         )}
 
-        {/* Button */}
+        {/* Back */}
         <button
           onClick={() => (window.location.href = "/")}
-          className="w-full bg-gradient-to-r from-blue-400 to-purple-400 py-3 rounded"
+          className="w-full mt-4 bg-gradient-to-r from-blue-400 to-purple-400 py-3 rounded"
         >
           ← New Payment
         </button>

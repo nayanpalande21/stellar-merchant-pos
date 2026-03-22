@@ -1,14 +1,20 @@
 import * as StellarSdk from "stellar-sdk";
 
-const server = new StellarSdk.Horizon.Server(
-  "https://horizon-testnet.stellar.org"
-);
+export function getServer(network) {
+  return new StellarSdk.Horizon.Server(
+    network === "mainnet"
+      ? "https://horizon.stellar.org"
+      : "https://horizon-testnet.stellar.org"
+  );
+}
 
-export async function checkPayments(address) {
-  const payments = await server
-    .payments()
-    .forAccount(address)
-    .call();
+export async function accountExists(address, network) {
+  const server = getServer(network);
 
-  return payments.records;
+  try {
+    await server.loadAccount(address);
+    return true;
+  } catch (e) {
+    return false;
+  }
 }
