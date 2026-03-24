@@ -35,6 +35,7 @@ export default function Home() {
   const [network, setNetwork] = useState("testnet");
   const [wallet,  setWallet]  = useState(null);
   const [paying,  setPaying]  = useState(false);
+  const[started ,setStarted] = useState(false);
 
   const router = useRouter();
 
@@ -78,7 +79,60 @@ export default function Home() {
     setPaying(false);
   }
 };
+if (!started) {
+    return (
+      <div style={{
+        minHeight: "100vh",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        background: "#000",
+        color: "#fff",
+        fontFamily: "Inter"
+      }}>
+        <div style={{
+          background: "rgba(18,22,36,0.92)",
+          border: "1px solid rgba(255,255,255,0.07)",
+          borderRadius: "24px",
+          padding: "32px",
+          width: "100%",
+          maxWidth: "400px"
+        }}>
+          <h1 style={{ fontSize: "20px", marginBottom: "10px" }}>
+            🚀 How to Use
+          </h1>
+
+          <p style={{ fontSize: "13px", opacity: 0.6, marginBottom: "20px" }}>
+            Accept crypto payments in seconds
+          </p>
+
+          <div>① Enter payment amount</div>
+          <div>② Connect Freighter wallet</div>
+          <div>③ Generate payment</div>
+          <div>④ Approve transaction</div>
+          <div>⑤ View on-chain proof</div>
+
+          <button
+            onClick={() => setStarted(true)}
+            style={{
+              marginTop: "20px",
+              width: "100%",
+              padding: "12px",
+              borderRadius: "12px",
+              border: "none",
+              background: "linear-gradient(90deg,#60a5fa,#a78bfa)",
+              color: "#fff",
+              cursor: "pointer"
+            }}
+          >
+            Get Started →
+          </button>
+        </div>
+      </div>
+    );
+  }
   return (
+    
     <>
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
