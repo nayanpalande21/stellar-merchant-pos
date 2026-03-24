@@ -1,4 +1,4 @@
-<img width="1410" height="642" alt="image" src="https://github.com/user-attachments/assets/d2096716-f9e1-4bf8-a0bc-8919e19ff4f7" />#  Stellar Merchant POS
+Stellar Merchant POS
 
 ##  Overview
 
