@@ -1,4 +1,4 @@
-Stellar Merchant POS
+ ## Stellar Merchant POS
 
 ##  Overview
 
