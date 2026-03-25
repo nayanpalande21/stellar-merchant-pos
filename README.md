@@ -100,11 +100,12 @@ Detailed system design available here:
 https://youtu.be/EbWxDq_z3sc
 
 ---
+##  DApp Preview
 
+![Home Page](./screenshots/home-page.png)
+
+ 
 ##  Screenshots
-
-###  Home Page
-![Home](./screenshots/home-page.png)
 
 ###  Wallet Connection
 ![Wallet](./screenshots/walletconnection.png)
