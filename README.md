@@ -110,8 +110,8 @@ Payment Detection Logic
 
 ## Architecture Document
 
-Detailed system design available here:  
- [architecture.md](./architecture.md)
+📄 [architecture.md](./architecture.md)
+
 ---
 
 ## Testing Strategy
@@ -184,19 +184,10 @@ The application was tested using:
 
 ## How to Run Locally
 
-Follow these steps to run the project locally:
-
 ```bash
-# Clone repository
 git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
-
-# Navigate to project
 cd YOUR_REPO
-
-# Install dependencies
 npm install
-
-# Run development server
 npm run dev
 ```
 
@@ -232,7 +223,7 @@ npm run dev
 
 ### On-Chain Proof
 
-![Onchain](./screenshots/onchain-proof.png)
+![Onchain](./screenshots/onchain-explorer-proof.png)
 
 ### Payment Success
 
@@ -249,11 +240,6 @@ npm run dev
 | 3     | [vaibhavijadhav856@gmail.com](mailto:vaibhavijadhav856@gmail.com)       | GBYUTGCNPXOLSHPZ6SCJQCCS3GSYLE2MXQQO6DFUQ2E7G4Y4NKSL2PFQ | 2 XLM | [View](https://stellar.expert/explorer/testnet/tx/e73b3d1d1618c134b0759735ba989975f59954e33de2d7e15d55277734dc8cb0) |
 | 4     | [manashulle@gmail.com](mailto:manashulle@gmail.com)                     | GDRWXCQ3IN3ZFXOKIPICFI2D7GERUQ4GEGISRGWND5VHQCXLO54YZ3JK | 5 XLM | [View](https://stellar.expert/explorer/testnet/tx/a3b762f938268320135f06e6ae8a13aa5bb35795fe4678d782672b81c443d4ec) |
 | 5     | [sayalin2006@gmail.com](mailto:sayalin2006@gmail.com)                   | GCLTDFYMDJZYLDKETB6Z24CCPHGFQS7NRZFJWT4AUXQZ5SF2BJOME7CN | 1 XLM | [View](https://stellar.expert/explorer/testnet/tx/cfad61525f39202b91244e7e480ea63f7c75188af733ffae801b086fef1ff32c) |
-
----
-
-All users successfully completed payments using the application interface.
-Each transaction was processed in real-time and verified on the Stellar Testnet blockchain, demonstrating the reliability and correctness of the payment system.
 
 ---
 
@@ -280,7 +266,6 @@ Each transaction was processed in real-time and verified on the Stellar Testnet 
 ![User5](./screenshots/tx-user5.png)
 
 ---
-
 
 ## User Feedback
 
@@ -310,8 +295,6 @@ Unlike theoretical projects, this MVP:
 * Has real users
 * Processes real blockchain transactions
 * Solves a practical business problem
-
-It bridges the gap between crypto and everyday commerce.
 
 ---
 
