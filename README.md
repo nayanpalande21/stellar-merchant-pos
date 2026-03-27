@@ -266,16 +266,8 @@ npm run dev
 ![User5](./screenshots/tx-user5.png)
 
 ---
-
-## User Feedback
-
-* **User 1:** Easy to use and clean UI
-* **User 2:** Payment confirmation is extremely fast and reliable
-* **User 3:** On-chain transaction visibility significantly increased user confidence in the system
-* **User 4:** UI looks modern, premium, and professional
-* **User 5:** Clear instructions improved usability for testnet users
-
----
+ ## Google form Sheet 
+ https://docs.google.com/spreadsheets/d/1GCcOLU0w7fN5MzbbGdaaemjKCHi3yrzK8WBL43L-OSw/edit?resourcekey=&gid=637474215#gid=637474215
 
 ## Improvements Based on Feedback
 
