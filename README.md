@@ -1,6 +1,33 @@
- ## Stellar Merchant POS
 
-##  Overview
+
+## 📑 Table of Contents
+
+* Overview
+* Problem
+* Solution
+* Key Learnings
+* Features
+* System Architecture
+* Testing Strategy
+* Tech Stack
+* Security
+* Performance
+* What Makes This Level 5
+* Demo
+* How to Run
+* User Flow
+* Screenshots
+* Test Users
+* Transaction Proof
+* Feedback
+* Future Enhancements
+* Conclusion
+
+---
+
+## Stellar Merchant POS
+
+## Overview
 
 Stellar Merchant POS is a modern **crypto point-of-sale system** built on the Stellar Network that enables merchants to accept payments in **XLM instantly**.
 
@@ -8,65 +35,66 @@ The application provides a clean and user-friendly interface where merchants can
 
 ---
 
-##  Problem
+## Problem
 
 Retail stores and small businesses lack simple tools to accept cryptocurrency payments. Existing blockchain solutions are often complex, slow, and not designed for everyday merchant use.
 
 ---
 
-##  Solution
+## Solution
 
 Stellar Merchant POS simplifies crypto payments by providing:
 
--  Simple and intuitive payment interface  
--  Instant blockchain verification  
--  Real-time payment confirmation  
+* Simple and intuitive payment interface
+* Instant blockchain verification
+* Real-time payment confirmation
 
 This makes crypto payments as seamless as UPI or card transactions.
 
 ---
-##  Key Learnings
 
-- Designing for real users requires simplicity over complexity  
-- Blockchain UX must feel instant and intuitive  
-- On-chain transparency significantly improves trust  
-- Iteration based on feedback is critical for product quality  
+## Key Learnings
 
----
-
-##  Features
-
-###  Core Features (Level 5)
-
-- Generate payment requests  
-- Real-time payment detection via Stellar blockchain  
-- Instant transaction confirmation  
-- Transaction history display  
-- Copy wallet address functionality  
-- Input validation (prevents invalid payments)  
-- Premium UI (glassmorphism + animated stars)
+* Designing for real users requires simplicity over complexity
+* Blockchain UX must feel instant and intuitive
+* On-chain transparency significantly improves trust
+* Iteration based on feedback is critical for product quality
 
 ---
 
-###  UX Enhancements
+## Features
 
-- Animated “Checking Blockchain” loader  
-- Payment success feedback  
-- Transaction counter  
-- Testnet usage warning  
+### Core Features (Level 5)
 
----
-
-###  Iteration Improvements (Based on Feedback)
-
-- Added copy-to-clipboard wallet feature  
-- Improved UI clarity and consistency  
-- Prevented duplicate transaction detection  
-- Enhanced success message visibility  
+* Generate payment requests
+* Real-time payment detection via Stellar blockchain
+* Instant transaction confirmation
+* Transaction history display
+* Copy wallet address functionality
+* Input validation (prevents invalid payments)
+* Premium UI (glassmorphism + animated stars)
 
 ---
 
-##  System Architecture
+### UX Enhancements
+
+* Animated “Checking Blockchain” loader
+* Payment success feedback
+* Transaction counter
+* Testnet usage warning
+
+---
+
+### Iteration Improvements (Based on Feedback)
+
+* Added copy-to-clipboard wallet feature
+* Improved UI clarity and consistency
+* Prevented duplicate transaction detection
+* Enhanced success message visibility
+
+---
+
+## System Architecture
 
 Frontend (Next.js)
 ↓
@@ -78,233 +106,236 @@ Stellar Blockchain
 ↓
 Payment Detection Logic
 
-
 ---
 
-##  Architecture Document
+## Architecture Document
 
 Detailed system design available here:  
  [architecture.md](./architecture.md)
-
 ---
-##  Testing Strategy
+
+## Testing Strategy
 
 The application was tested using:
 
-- Multiple real users (5 participants)
-- Different transaction amounts
-- Repeated transactions to ensure consistency
-- On-chain verification via Stellar Expert
+* Multiple real users (5 participants)
+* Different transaction amounts
+* Repeated transactions to ensure consistency
+* On-chain verification via Stellar Expert
 
 ### Key Validations
 
-- Payment detection accuracy  
-- Transaction confirmation speed  
-- Duplicate transaction prevention  
-- UI responsiveness and usability  
+* Payment detection accuracy
+* Transaction confirmation speed
+* Duplicate transaction prevention
+* UI responsiveness and usability
 
 ---
+
 ## Tech Stack
 
-- **Frontend:** Next.js, React, Tailwind CSS  
-- **Blockchain:** Stellar Network (Horizon API)  
-- **Library:** stellar-sdk  
-- **Wallet:** Freighter Wallet  
-
----
-##  Security Considerations
-
-- Input validation prevents invalid transaction values  
-- Transactions are verified directly from the blockchain  
-- No private keys are stored in the application  
-- Freighter wallet ensures secure signing  
+* **Frontend:** Next.js, React, Tailwind CSS
+* **Blockchain:** Stellar Network (Horizon API)
+* **Library:** stellar-sdk
+* **Wallet:** Freighter Wallet
 
 ---
 
-##  Performance Highlights
+## Security Considerations
 
--  Near-instant transaction confirmation  
--  Real-time blockchain polling  
--  Minimal network fees (~0.00001 XLM)  
--  Fast UI rendering with Next.js  
+* Input validation prevents invalid transaction values
+* Transactions are verified directly from the blockchain
+* No private keys are stored in the application
+* Freighter wallet ensures secure signing
+
+---
+
+## Performance Highlights
+
+* Near-instant transaction confirmation
+* Real-time blockchain polling
+* Minimal network fees (~0.00001 XLM)
+* Fast UI rendering with Next.js
 
 ---
 
 ## What Makes This a Level 5 Project
 
-- Real users interacting with the application  
-- Real blockchain transactions (Stellar Testnet)  
-- End-to-end payment flow implementation  
-- Strong UI/UX with premium design  
-- On-chain verification and transparency  
-- Iterative improvements based on feedback  
+* Real users interacting with the application
+* Real blockchain transactions (Stellar Testnet)
+* End-to-end payment flow implementation
+* Strong UI/UX with premium design
+* On-chain verification and transparency
+* Iterative improvements based on feedback
 
 ---
-##  Live Demo
 
- https://stellar-merchant-pos-uaao.vercel.app/
+## Live Demo
+
+👉 https://stellar-merchant-pos-uaao.vercel.app/
 
 ---
 
 ## Demo Video
 
-https://youtu.be/EbWxDq_z3sc
+👉 https://youtu.be/EbWxDq_z3sc
 
 ---
 
-##  How to Run Locally
+## How to Run Locally
 
 Follow these steps to run the project locally:
 
 ```bash
 # Clone repository
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/YOUR_USERNAME/YOUR_REPO.git
 
 # Navigate to project
-cd your-repo-name
+cd YOUR_REPO
 
 # Install dependencies
 npm install
 
 # Run development server
 npm run dev
-
-
----
-##  User Flow
-
-1. Merchant enters payment amount  
-2. Merchant connects Freighter wallet  
-3. Payment request is generated  
-4. Customer pays using Stellar wallet  
-5. System detects transaction on-chain  
-6. Payment is confirmed instantly  
-7. Transaction proof is displayed  
+```
 
 ---
-##  DApp Preview
+
+## User Flow
+
+1. Merchant enters payment amount
+2. Merchant connects Freighter wallet
+3. Payment request is generated
+4. Customer pays using Stellar wallet
+5. System detects transaction on-chain
+6. Payment is confirmed instantly
+7. Transaction proof is displayed
+
+---
+
+## DApp Preview
 
 ![Home Page](./screenshots/home-page.png)
 
- 
-##  Screenshots
+---
 
-###  Wallet Connection
+## Screenshots
+
+### Wallet Connection
+
 ![Wallet](./screenshots/walletconnection.png)
 
-###  Payment Request
+### Payment Request
+
 ![Payment](./screenshots/payment-request.png)
 
-###  On-Chain Proof
+### On-Chain Proof
+
 ![Onchain](./screenshots/onchain-proof.png)
 
-###  Payment Success
+### Payment Success
+
 ![Success](./screenshots/payment-successful.png)
 
 ---
 
-##  Test Users (Stellar Wallets)
-| Sr No | Email                                                                   | Account                                                  | XLM   | Link                                                                                                                                                                                                                       |
-| ----- | ----------------------------------------------------------------------- | -------------------------------------------------------- | ----- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1     | [sujaypalande24022001@gmail.com](mailto:sujaypalande24022001@gmail.com) | GCLHTHMOVW3J6O3IVLZWMWDONMLPONJTR6QSLI2SSBWAKB44IKJE3ES2 | 4 XLM | [https://stellar.expert/explorer/testnet/tx/039fe9f84d3870053f1daee4e22145135dafa814a4e8cb03fe3d1f0c0d674501](https://stellar.expert/explorer/testnet/tx/039fe9f84d3870053f1daee4e22145135dafa814a4e8cb03fe3d1f0c0d674501) |
-| 2     | [cdhasal23@gmail.com](mailto:cdhasal23@gmail.com)                       | GDJCKA3JG2BUJO5LJLD66DATXE4HCJG62XPLFJKNJRVQSBA3IPB2BWQ2 | 1 XLM | [https://stellar.expert/explorer/testnet/tx/e0c6804ece42cdca09b43c32ef87afc42ebeaa945709a796a9cd8a6cf9fad863](https://stellar.expert/explorer/testnet/tx/e0c6804ece42cdca09b43c32ef87afc42ebeaa945709a796a9cd8a6cf9fad863) |
-| 3     | [vaibhavijadhav856@gmail.com](mailto:vaibhavijadhav856@gmail.com)       | GBYUTGCNPXOLSHPZ6SCJQCCS3GSYLE2MXQQO6DFUQ2E7G4Y4NKSL2PFQ | 2 XLM | [https://stellar.expert/explorer/testnet/tx/e73b3d1d1618c134b0759735ba989975f59954e33de2d7e15d55277734dc8cb0](https://stellar.expert/explorer/testnet/tx/e73b3d1d1618c134b0759735ba989975f59954e33de2d7e15d55277734dc8cb0) |
-| 4     | [manashulle@gmail.com](mailto:manashulle@gmail.com)                     | GDRWXCQ3IN3ZFXOKIPICFI2D7GERUQ4GEGISRGWND5VHQCXLO54YZ3JK | 5 XLM | [https://stellar.expert/explorer/testnet/tx/a3b762f938268320135f06e6ae8a13aa5bb35795fe4678d782672b81c443d4ec](https://stellar.expert/explorer/testnet/tx/a3b762f938268320135f06e6ae8a13aa5bb35795fe4678d782672b81c443d4ec) |
-| 5     | [sayalin2006@gmail.com](mailto:sayalin2006@gmail.com)                   | GCLTDFYMDJZYLDKETB6Z24CCPHGFQS7NRZFJWT4AUXQZ5SF2BJOME7CN | 1 XLM | [https://stellar.expert/explorer/testnet/tx/cfad61525f39202b91244e7e480ea63f7c75188af733ffae801b086fef1ff32c](https://stellar.expert/explorer/testnet/tx/cfad61525f39202b91244e7e480ea63f7c75188af733ffae801b086fef1ff32c) |
+## Test Users (Stellar Wallets)
+
+| Sr No | Email                                                                   | Account                                                  | XLM   | Link                                                                                                                |
+| ----- | ----------------------------------------------------------------------- | -------------------------------------------------------- | ----- | ------------------------------------------------------------------------------------------------------------------- |
+| 1     | [sujaypalande24022001@gmail.com](mailto:sujaypalande24022001@gmail.com) | GCLHTHMOVW3J6O3IVLZWMWDONMLPONJTR6QSLI2SSBWAKB44IKJE3ES2 | 4 XLM | [View](https://stellar.expert/explorer/testnet/tx/039fe9f84d3870053f1daee4e22145135dafa814a4e8cb03fe3d1f0c0d674501) |
+| 2     | [cdhasal23@gmail.com](mailto:cdhasal23@gmail.com)                       | GDJCKA3JG2BUJO5LJLD66DATXE4HCJG62XPLFJKNJRVQSBA3IPB2BWQ2 | 1 XLM | [View](https://stellar.expert/explorer/testnet/tx/e0c6804ece42cdca09b43c32ef87afc42ebeaa945709a796a9cd8a6cf9fad863) |
+| 3     | [vaibhavijadhav856@gmail.com](mailto:vaibhavijadhav856@gmail.com)       | GBYUTGCNPXOLSHPZ6SCJQCCS3GSYLE2MXQQO6DFUQ2E7G4Y4NKSL2PFQ | 2 XLM | [View](https://stellar.expert/explorer/testnet/tx/e73b3d1d1618c134b0759735ba989975f59954e33de2d7e15d55277734dc8cb0) |
+| 4     | [manashulle@gmail.com](mailto:manashulle@gmail.com)                     | GDRWXCQ3IN3ZFXOKIPICFI2D7GERUQ4GEGISRGWND5VHQCXLO54YZ3JK | 5 XLM | [View](https://stellar.expert/explorer/testnet/tx/a3b762f938268320135f06e6ae8a13aa5bb35795fe4678d782672b81c443d4ec) |
+| 5     | [sayalin2006@gmail.com](mailto:sayalin2006@gmail.com)                   | GCLTDFYMDJZYLDKETB6Z24CCPHGFQS7NRZFJWT4AUXQZ5SF2BJOME7CN | 1 XLM | [View](https://stellar.expert/explorer/testnet/tx/cfad61525f39202b91244e7e480ea63f7c75188af733ffae801b086fef1ff32c) |
 
 ---
 
-All users successfully completed payments using the application interface.  
+All users successfully completed payments using the application interface.
 Each transaction was processed in real-time and verified on the Stellar Testnet blockchain, demonstrating the reliability and correctness of the payment system.
 
 ---
 
-##  Transaction Proof (Testnet)
-
-Below are real transaction screenshots captured during testing:
+## Transaction Proof (Testnet)
 
 ### User 1 (4 XLM)
+
 ![User1](./screenshots/tx-user1.png)
 
 ### User 2 (1 XLM)
+
 ![User2](./screenshots/tx-user2.png)
 
 ### User 3 (2 XLM)
+
 ![User3](./screenshots/tx-user3.png)
 
 ### User 4 (5 XLM)
+
 ![User4](./screenshots/tx-user4.png)
 
 ### User 5 (1 XLM)
+
 ![User5](./screenshots/tx-user5.png)
 
 ---
 
-##  On-Chain Verification (Stellar Explorer)
 
-Below is proof of transactions verified on the Stellar Testnet blockchain using Stellar Expert.
+## User Feedback
 
-![OnChain Explorer](./screenshots/onchain-explorer-proof.png)
-
-
-
----
-
-##  User Feedback
-
-- **User 1:** Easy to use and clean UI  
-- **User 2:** Payment confirmation is extremely fast and reliable  
-- **User 3:** On-chain transaction visibility significantly increased user confidence in the system
-- **User 4:** UI looks modern, premium, and professional  
-- **User 5:** Clear instructions improved usability for testnet users  
+* **User 1:** Easy to use and clean UI
+* **User 2:** Payment confirmation is extremely fast and reliable
+* **User 3:** On-chain transaction visibility significantly increased user confidence in the system
+* **User 4:** UI looks modern, premium, and professional
+* **User 5:** Clear instructions improved usability for testnet users
 
 ---
-
 
 ## Improvements Based on Feedback
 
-- Added “Tap to Copy” wallet feature  
-- Improved success message visibility  
-- Added testnet usage warning  
-- Enhanced UI responsiveness  
+* Added “Tap to Copy” wallet feature
+* Improved success message visibility
+* Added testnet usage warning
+* Enhanced UI responsiveness
 
 ---
 
-##  Why This Project Matters
+## Why This Project Matters
 
 This project demonstrates real-world adoption of blockchain in retail.
 
 Unlike theoretical projects, this MVP:
 
--  Has real users  
--  Processes real blockchain transactions  
--  Solves a practical business problem  
+* Has real users
+* Processes real blockchain transactions
+* Solves a practical business problem
 
 It bridges the gap between crypto and everyday commerce.
 
 ---
 
-##  Future Enhancements (Level 6)
+## Future Enhancements (Level 6)
 
-- Analytics dashboard (revenue, transactions)  
-- Multi-merchant support  
-- Fee sponsorship (gasless payments)  
-- Multi-signature payment approval  
-- Cross-border payments  
-- Real-time transaction streaming (WebSockets)  
-- Database integration (Supabase)  
-- User analytics (DAU, retention)  
+* Analytics dashboard (revenue, transactions)
+* Multi-merchant support
+* Fee sponsorship (gasless payments)
+* Multi-signature payment approval
+* Cross-border payments
+* Real-time transaction streaming (WebSockets)
+* Database integration (Supabase)
+* User analytics (DAU, retention)
 
 ---
 
-##  Note
+## Note
 
-This project uses **Stellar Testnet only**.  
+This project uses **Stellar Testnet only**.
 No real funds are involved.
 
 ---
 
-##  Conclusion
+## Conclusion
 
 Stellar Merchant POS showcases how blockchain can power real-world retail payments with speed, security, and simplicity.
 
