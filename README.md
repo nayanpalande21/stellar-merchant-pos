@@ -92,7 +92,7 @@ This makes crypto payments as seamless as UPI or card transactions.
   - Total users
   - Transactions
   - Activity
-- (Add dashboard link if available)
+- ![Home Page](./screenshots/home-page.png)
 
 ---
 
@@ -214,7 +214,7 @@ The application was tested using:
 * No private keys are stored in the application
 * Freighter wallet ensures secure signing
 
----
+
 ---
 
 ## Monitoring
@@ -355,7 +355,7 @@ npm run dev
 
 ---
  ## Google form Sheet 
- https://docs.google.com/spreadsheets/d/1GCcOLU0w7fN5MzbbGdaaemjKCHi3yrzK8WBL43L-OSw/edit?resourcekey=&gid=637474215#gid=637474215
+https://docs.google.com/spreadsheets/d/1GCcOLU0w7fN5MzbbGdaaemjKCHi3yrzK8WBL43L-OSw/edit?resourcekey=&gid=637474215#gid=637474215
 
 ## Improvements Based on Feedback
 
@@ -364,7 +364,7 @@ npm run dev
 * Added testnet usage warning
 * Enhanced UI responsiveness
 
----
+
 
 ---
 
@@ -390,13 +390,16 @@ Unlike theoretical projects, this MVP:
 
 ---
 
-## 📈 Future Improvements (Based on Feedback)
+##  Future Improvements (Based on Feedback)
 
 - Improve onboarding UX  
+Commit: https://github.com/nayanpalande21/stellar-merchant-pos/commit/0fb6e80a23071c81b434a0464d671437c2aaca4c
 
-- Enhance transaction confirmation experience  
+- Enhance transaction confirmation experience
+https://github.com/nayanpalande21/stellar-merchant-pos/commit/4da4c82bde991b679140d0313c5af9a03166cfcb
 
-- Optimize UI responsiveness  
+- Optimize UI responsiveness 
+https://github.com/nayanpalande21/stellar-merchant-pos/commit/bab0a0c7481dced5ec69da8c846a7779c1cb7ad4
 
 
 ---
